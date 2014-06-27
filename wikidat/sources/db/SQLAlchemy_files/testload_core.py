@@ -1,4 +1,6 @@
-
+"""
+Inserts data into database using SQLAlchemy CORE and PyMySQl connector - (python 3 syntax).
+"""
 from sqlalchemy import create_engine
 import statistics
 import pymysql
@@ -26,6 +28,7 @@ with open('revision_hash.csv', newline = '' , encoding = 'utf-8') as revision_ha
 	fieldnames = ('rev_id', 'rev_page', 'rev_user', 'rev_hash')
 	reader = csv.DictReader(revision_hash_file, fieldnames = fieldnames, delimiter='\t')
 	revision_hash_dict = [row for row in reader]
+
 
 def load():
 	engine.execute(dbschema_core.page.insert(),page_dict)
