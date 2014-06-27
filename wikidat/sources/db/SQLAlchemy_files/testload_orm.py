@@ -34,15 +34,15 @@ session = Session()
 #or so, so that the computer wont hang, but it depends on the computer
 def load():
     for item in page_data:
-        session.add(dbschema.Page(*item))
+        session.add(dbschema_orm.Page(*item))
     session.commit()
 
     for item in revision_data:
-        session.add(dbschema.Revision(*item))
+        session.add(dbschema_orm.Revision(*item))
     session.commit()
 
     for item in revision_hash_data:
-        session.add(dbschema.RevisionHash(*item))
+        session.add(dbschema_orm.RevisionHash(*item))
     session.commit()
 
 
@@ -55,8 +55,8 @@ timer = timeit.Timer(stmt='load()', setup='from __main__ import load')
 total = []
 
 def run_time_test():
-    dbschema.Base.metadata.drop_all(engine)
-    dbschema.Base.metadata.create_all(engine)	
+    dbschema_orm.Base.metadata.drop_all(engine)
+    dbschema_orm.Base.metadata.create_all(engine)	
     return(timer.timeit(number=1))
 
 for x in range(int(sys.argv[1])):

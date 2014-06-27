@@ -1,6 +1,5 @@
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 import statistics
 import pymysql
 import csv
@@ -29,11 +28,11 @@ with open('revision_hash.csv', newline = '' , encoding = 'utf-8') as revision_ha
 	revision_hash_dict = [row for row in reader]
 
 def load():
-	engine.execute(dbschema.page.insert(),page_dict)
+	engine.execute(dbschema_core.page.insert(),page_dict)
 
-	engine.execute(dbschema.revision.insert(),revision_dict)
+	engine.execute(dbschema_core.revision.insert(),revision_dict)
 
-	engine.execute(dbschema.revision_hash.insert(),revision_hash_dict)	
+	engine.execute(dbschema_core.revision_hash.insert(),revision_hash_dict)	
 	
 
 timer = timeit.Timer(stmt='load()', setup='from __main__ import load')
@@ -41,8 +40,8 @@ timer = timeit.Timer(stmt='load()', setup='from __main__ import load')
 total = []
 
 def run_time_test():
-    dbschema.metadata.drop_all(engine)
-    dbschema.metadata.create_all(engine)	
+    dbschema_core.metadata.drop_all(engine)
+    dbschema_core.metadata.create_all(engine)	
     return(timer.timeit(number=1))
 
 for x in range(int(sys.argv[1])):
