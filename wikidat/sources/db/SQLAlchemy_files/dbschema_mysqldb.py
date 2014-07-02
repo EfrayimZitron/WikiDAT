@@ -5,7 +5,8 @@ the PyMySQL MySQL database connector. (MySQLdb seems to be more popular, but lac
 
 """
 
-from sqlalchemy import *
+from sqlalchemy import Column, create_engine
+from sqlalchemy.types import SMALLINT, VARBINARY
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DATETIME, TEXT, TINYINT, TINYBLOB, VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -41,7 +42,7 @@ class Revision(Base):
     rev_user = Column(INTEGER(unsigned=True), nullable=False, default=0)
     rev_timestamp = Column(DATETIME, nullable=False)
     rev_len = Column(INTEGER(unsigned=True), nullable=False)
-    rev_parent_id = Column(INTEGER(unsigned=True), nullable=True, default=null)
+    rev_parent_id = Column(INTEGER(unsigned=True), nullable=True, default= 'NULL')
     rev_is_redirect = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)
     rev_minor_edit = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)
     rev_fa = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)

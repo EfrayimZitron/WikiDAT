@@ -28,7 +28,7 @@ def load():
     for item in page_data:
         session.add(dbschema_mysqldb.Page(*item))
     session.commit()
-
+    
     for item in revision_data:
         session.add(dbschema_mysqldb.Revision(*item))
     session.commit()
@@ -41,9 +41,9 @@ def load():
 # data would fail due to primary key violations
 def run_time_test():
     dbschema_mysqldb.Base.metadata.drop_all(engine)
-    dbschema_mysqldb.Base.metadata.create_all(engine)	
+    dbschema_mysqldb.Base.metadata.create_all(engine)   
     return(timer.timeit(number=1))
-	
+    
 # Had to append '/?charset=utf8' to the create_engine string since there were encoding errors (UnicodeEncodeErrors)
 # when I ran the script without it. 
 engine = create_engine('mysql+mysqldb://root:@localhost')
@@ -51,14 +51,14 @@ engine.execute("USE wikidb")
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Timer calculates how much time it takes for the data to be loaded into the database.	
+# Timer calculates how much time it takes for the data to be loaded into the database.  
 timer = timeit.Timer(stmt='load()', setup='from __main__ import load')
 
 total = []
 
 for x in range(int(sys.argv[1])):
-	total.append(run_time_test())
-	print 'Run', x, 'took', total[x]
+    total.append(run_time_test())
+    print 'Run', x, 'took', total[x]
 
 print 'The fastest run was:', min(total), 'secs'
 print 'Average running time:', sum(total)/len(total)
