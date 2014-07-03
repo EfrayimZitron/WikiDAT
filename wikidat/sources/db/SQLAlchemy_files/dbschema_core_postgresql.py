@@ -8,7 +8,8 @@ do both consecutively
 - Can't establish varhcars as binary types
 - Can't seem to set rev_parent_id default to NULL
 - Can't set width of integer for log_namespace
-- Can't set page_restrictions to a binary BYTEA type; get "TypeError can't escape str to binary"
+- Can't set page_restrictions or rev_hash to a binary BYTEA type; get "TypeError can't escape str to binary"
+  This seems to be an issue exclusive to Python 3 as it handles string and bytes data differently than Py 2
 """
 
 from sqlalchemy import Table, Column, MetaData, text
@@ -26,7 +27,7 @@ page = Table('page', metadata,
     Column('page_id', INTEGER, nullable=False),
     Column('page_namespace', SMALLINT, nullable = False),
     Column('page_title', VARCHAR(length=255, binary=True), nullable=False),
-    Column('page_restrictions', VARCHAR(256), nullable=False, server_default=''))
+    Column('page_restrictions', BYTEA(256), nullable=False, server_default=''))
 
 revision = Table('revision', metadata,
     Column('rev_id', INTEGER, nullable=False),
