@@ -14,9 +14,10 @@ engine = create_engine('mysql+pymysql://root:@localhost/?charset=utf8')
 engine.execute("USE wikidb")
 
 with open('page.csv', newline = '' , encoding = 'utf-8') as page_file:
-	fieldnames = ('page_id', 'page_namepsace', 'page_title', 'page_restrictions')
+	fieldnames = ('page_id', 'page_namespace', 'page_title', 'page_restrictions')
 	reader = csv.DictReader(page_file, fieldnames = fieldnames, delimiter='\t')
 	page_dict = [row for row in reader]
+	
 
 with open('revision.csv', newline = '' , encoding = 'utf-8') as revision_file:
 	fieldnames = ('rev_id', 'rev_page', 'rev_user', 'rev_timestamp', 'rev_len', 'rev_parent_id',
@@ -31,6 +32,7 @@ with open('revision_hash.csv', newline = '' , encoding = 'utf-8') as revision_ha
 
 
 def load():
+
 	engine.execute(dbschema_core.page.insert(),page_dict)
 
 	engine.execute(dbschema_core.revision.insert(),revision_dict)
