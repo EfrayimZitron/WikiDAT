@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import MySQLdb
 import csv
 import sys
-import dbschema_core
+import dbschema_mysqldb_core
 import timeit
 
 engine = create_engine('mysql+mysqldb://root:@localhost/?charset=utf8')
@@ -33,11 +33,11 @@ with open('revision_hash.csv') as revision_hash_file:
 
 
 def load():
-    engine.execute(dbschema_core.page.insert(),page_dict)
+    engine.execute(dbschema_mysqldb_core.page.insert(),page_dict)
 
-    engine.execute(dbschema_core.revision.insert(),revision_dict)
+    engine.execute(dbschema_mysqldb_core.revision.insert(),revision_dict)
 
-    engine.execute(dbschema_core.revision_hash.insert(),revision_hash_dict) 
+    engine.execute(dbschema_mysqldb_core.revision_hash.insert(),revision_hash_dict) 
 
 # Timer calculates how much time it takes for the data to be loaded into the database.
 # Had to specify that the timer should only run one execution of the code since multiple runs of inserting identical
@@ -47,8 +47,8 @@ timer = timeit.Timer(stmt='load()', setup='from __main__ import load')
 total = []
 
 def run_time_test():
-    dbschema_core.metadata.drop_all(engine)
-    dbschema_core.metadata.create_all(engine)   
+    dbschema_mysqldb_core.metadata.drop_all(engine)
+    dbschema_mysqldb_core.metadata.create_all(engine)   
     return(timer.timeit(number=1))
     
 for x in range(int(sys.argv[1])):

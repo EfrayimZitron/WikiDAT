@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 import MySQLdb
 import csv
 import sys
-import dbschema_mysqldb
+import dbschema_mysqldb_orm
 import timeit
 
 # loads data from csv file into a list (of lists)
@@ -31,22 +31,22 @@ with open('revision_hash.csv') as f:
 #or so, so that the computer wont hang, but it depends on the computer
 def load():
     for item in page_data:
-        session.add(dbschema_mysqldb.Page(*item))
+        session.add(dbschema_mysqldb_orm.Page(*item))
     session.commit()
     
     for item in revision_data:
-        session.add(dbschema_mysqldb.Revision(*item))
+        session.add(dbschema_mysqldb_orm.Revision(*item))
     session.commit()
 
     for item in revision_hash_data:
-        session.add(dbschema_mysqldb.RevisionHash(*item))
+        session.add(dbschema_mysqldb_orm.RevisionHash(*item))
     session.commit()
 
 # Had to specify that the timer should only run one execution of the code since multiple runs of inserting identical
 # data would fail due to primary key violations
 def run_time_test():
-    dbschema_mysqldb.Base.metadata.drop_all(engine)
-    dbschema_mysqldb.Base.metadata.create_all(engine)   
+    dbschema_mysqldb_orm.Base.metadata.drop_all(engine)
+    dbschema_mysqldb_orm.Base.metadata.create_all(engine)   
     return(timer.timeit(number=1))
     
 # Had to append '/?charset=utf8' to the create_engine string since there were encoding errors (UnicodeEncodeErrors)

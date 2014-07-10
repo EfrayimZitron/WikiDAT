@@ -50,7 +50,7 @@ def run_time_test():
 
 for x in range(int(sys.argv[1])):
     total.append(run_time_test())
-    print ('Run', x, 'took', total[x], 'secs')
+    print 'Run', x, 'took', total[x], 'secs'
     
 print 'Average running time:', sum(total)/len(total)
 print 'The fastest run was:', min(total), 'secs'
