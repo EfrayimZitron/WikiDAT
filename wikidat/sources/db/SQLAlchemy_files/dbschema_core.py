@@ -22,7 +22,7 @@ metadata = MetaData()
 
 page = Table('page', metadata,
     Column('page_id', INTEGER(unsigned=True), nullable=False),
-    Column('page_namespace', SMALLINT, nullable = False),
+    Column('page_namespace', SMALLINT, nullable=False),
     Column('page_title', VARCHAR(length=255, binary=True), nullable=False),
     Column('page_restrictions', TINYBLOB, nullable=False),
     mysql_engine='InnoDB')
@@ -36,7 +36,7 @@ revision = Table('revision', metadata,
     Column('rev_user', INTEGER(unsigned=True), nullable=False, default=0),
     Column('rev_timestamp', DATETIME, nullable=False),
     Column('rev_len', INTEGER(unsigned=True), nullable=False),
-    Column('rev_parent_id', INTEGER(unsigned=True), nullable=True, default = 'NULL'),
+    Column('rev_parent_id', INTEGER(unsigned=True), nullable=True, default = 'Null'),
     Column('rev_is_redirect', TINYINT(display_width=1, unsigned=True), nullable=False, default=0),
     Column('rev_minor_edit', TINYINT(display_width=1, unsigned=True), nullable=False, default=0),
     Column('rev_fa', TINYINT(display_width=1, unsigned=True), nullable=False, default=0),

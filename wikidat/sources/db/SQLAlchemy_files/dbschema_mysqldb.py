@@ -42,7 +42,7 @@ class Revision(Base):
     rev_user = Column(INTEGER(unsigned=True), nullable=False, default=0)
     rev_timestamp = Column(DATETIME, nullable=False)
     rev_len = Column(INTEGER(unsigned=True), nullable=False)
-    rev_parent_id = Column(INTEGER(unsigned=True), nullable=True, default= 'NULL')
+    rev_parent_id = Column(INTEGER(unsigned=True), nullable=True, default= 'Null')
     rev_is_redirect = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)
     rev_minor_edit = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)
     rev_fa = Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=0)
