@@ -16,8 +16,13 @@ with open('page.csv') as f:
 
 with open('revision.csv') as f:
     reader = csv.reader(f, delimiter='\t')
-    revision_data = list(list(row) for row in reader)
-
+    revision_data = []
+    for row in reader:
+        if row[5] == 'NULL':
+            row[5] = None 
+        revision_data.append(row)
+		
+		
 with open('revision_hash.csv') as f:
     reader = csv.reader(f, delimiter='\t')
     revision_hash_data = list(list(row) for row in reader)
