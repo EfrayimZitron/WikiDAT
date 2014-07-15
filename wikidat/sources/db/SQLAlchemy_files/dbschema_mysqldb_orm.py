@@ -140,7 +140,8 @@ class Logging(Base):
 
 
 engine = create_engine('mysql+mysqldb://root:@localhost/')
-#engine.execute("CREATE DATABASE IF NOT EXISTS wikidb CHARACTER SET utf8 COLLATE utf8_general_ci")  # create db
+engine.execute("DROP DATABASE IF EXISTS wikidb")
+engine.execute("CREATE DATABASE IF NOT EXISTS wikidb CHARACTER SET utf8 COLLATE utf8_general_ci")  # create db
 engine.execute("USE wikidb")
 Base.metadata.create_all(engine)
 	

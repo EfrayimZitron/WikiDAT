@@ -49,10 +49,8 @@ def run_time_test():
     dbschema_mysqldb_orm.Base.metadata.create_all(engine)   
     return(timer.timeit(number=1))
     
-# Had to append '/?charset=utf8' to the create_engine string since there were encoding errors (UnicodeEncodeErrors)
-# when I ran the script without it. 
-engine = create_engine('mysql+mysqldb://root:@localhost')
-engine.execute("USE wikidb")
+
+engine = create_engine('mysql+mysqldb://root:@localhost/wikidb')
 Session = sessionmaker(bind=engine)
 session = Session()
 

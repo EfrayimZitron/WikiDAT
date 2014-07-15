@@ -7,8 +7,7 @@ import sys
 import dbschema_mysqldb_core
 import timeit
 
-engine = create_engine('mysql+mysqldb://root:@localhost/?charset=utf8')
-engine.execute("USE wikidb")
+engine = create_engine('mysql+mysqldb://root:@localhost/wikidb')
 
 with open('page.csv') as page_file:
     fieldnames = ('page_id', 'page_namepsace', 'page_title', 'page_restrictions')
