@@ -53,7 +53,6 @@ for x in range(int(sys.argv[1])):
 	total.append(run_time_test())
 	print ('Run', x, 'took', total[x], 'secs')
 	
-#print ('Average running time:', sum(total)/len(total))
 print ('The fastest run was:', min(total), 'secs')
 print ('Average running time:', statistics.mean(total), 'secs')
 print ('Standard Deviation:', statistics.stdev(total), 'secs')

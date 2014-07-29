@@ -7,6 +7,7 @@ import pymysql
 import csv
 import sys
 import dbschema_orm
+import statistics
 import timeit
 
 # loads data from csv file into a list (of lists)
@@ -64,4 +65,5 @@ for x in range(int(sys.argv[1])):
 
 print ('The fastest run was:', min(total), 'secs')
 print ('Average running time:', sum(total)/len(total), 'secs')
+print ('Standard Deviation:', statistics.stdev(total), 'secs')
 	

@@ -15,7 +15,7 @@ import sys
 
 Base = declarative_base()
 
-dbengine = 'InnoDB'  # sys.argv[1]
+dbengine = 'MyISAM'  # sys.argv[1]
 params = {'mysql_engine': dbengine}
 
 

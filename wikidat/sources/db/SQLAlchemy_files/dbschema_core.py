@@ -25,7 +25,7 @@ page = Table('page', metadata,
     Column('page_namespace', SMALLINT, nullable=False),
     Column('page_title', VARCHAR(length=255, binary=True), nullable=False),
     Column('page_restrictions', TINYBLOB, nullable=False),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
@@ -43,7 +43,7 @@ revision = Table('revision', metadata,
     Column('rev_flist', TINYINT(display_width=1, unsigned=True), nullable=False, default=0),
     Column('rev_ga', TINYINT(display_width=1, unsigned=True), nullable=False, default=0),
     Column('rev_comment', TEXT, nullable=False),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
@@ -52,7 +52,7 @@ revision_hash = Table('revision_hash', metadata,
     Column('rev_page', INTEGER(unsigned=True), nullable=False),
     Column('rev_user', INTEGER(unsigned=True), nullable=False, default=0),
     Column('rev_hash', VARBINARY(256), nullable=False),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
@@ -60,14 +60,14 @@ revision_hash = Table('revision_hash', metadata,
 namespaces = Table('namespaces', metadata,
     Column('code', SMALLINT, nullable=False),
     Column('name', VARCHAR(50), nullable=False),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
 people = Table('people', metadata,
     Column('rev_user', INTEGER(unsigned=True), nullable=False, default=0),
     Column('rev_user_text', VARCHAR(length=255, binary=True), nullable=True, default=''),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
@@ -84,7 +84,7 @@ logging = Table('logging', metadata,
     Column('log_params', VARCHAR(length=255, binary=True), nullable=False, default=''),
     Column('log_new_flag', INTEGER(unsigned=True), nullable=False, default=0),
     Column('log_old_flag', INTEGER(unsigned=True), nullable=False),
-    mysql_engine='InnoDB')
+    mysql_engine='MyISAM')
 
 
 
