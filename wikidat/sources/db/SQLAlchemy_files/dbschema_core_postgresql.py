@@ -29,6 +29,7 @@ page = Table('page', metadata,
     Column('page_title', VARCHAR(length=255, binary=True), nullable=False),
     Column('page_restrictions', BYTEA(256), nullable=False, server_default=''))
 
+	
 revision = Table('revision', metadata,
     Column('rev_id', INTEGER, nullable=False),
     Column('rev_page', INTEGER, nullable=False),
@@ -43,20 +44,24 @@ revision = Table('revision', metadata,
     Column('rev_ga', BOOLEAN, nullable=False, server_default='0'),
     Column('rev_comment', TEXT, nullable=False))
 
+	
 revision_hash = Table('revision_hash', metadata,
     Column('rev_id', INTEGER, nullable=False),
     Column('rev_page', INTEGER, nullable=False),
     Column('rev_user', INTEGER, nullable=False, server_default = text('0')),
     Column('rev_hash', BYTEA(256), nullable=False))
 
+	
 namespaces = Table('namespaces', metadata,
     Column('code', SMALLINT, nullable=False),
     Column('name', VARCHAR(50), nullable=False))
 
+	
 people = Table('people', metadata,
     Column('rev_user', INTEGER, nullable=False, server_default= text('0')),
     Column('rev_user_text', VARCHAR(length=255, binary=True), nullable=True, server_default=''))
 
+	
 logging = Table('logging', metadata,
     Column('log_id', INTEGER, nullable=False),
     Column('log_type', VARCHAR(length=15, binary=True), nullable=False),
@@ -72,6 +77,29 @@ logging = Table('logging', metadata,
     Column('log_old_flag', INTEGER, nullable=False))
 
 
+block = Table('block', metadata,
+    Column('block_id', INTEGER, nullable=False),
+    Column('block_action', VARCHAR(length = 15, binary = True), nullable=False),
+    Column('block_user', INTEGER, nullable=False),
+    Column('block_timestamp', DateTime, nullable=False),
+    Column('block_target', INTEGER, nullable=False),
+    Column('block_ip', INTEGER, nullable= False),
+    Column('block_duration', INTEGER, nullable=False))
+
+	
+new_user = Table('new_user', metadata,
+    Column('user_id',INTEGER, nullable=False),
+    Column('username', VARCHAR(length = 255), nullable=False),
+    Column('user_timestamp', DateTime, nullable=False),
+    Column('user_action', VARCHAR(length = 15), nullable=False))
+
+	
+right = Table('right', metadata,
+    Column('right_id', INTEGER, nullable=False),
+    Column('right_username', VARCHAR(length = 255), nullable=False),
+    Column('right_timestamp', DateTime, nullable=False),
+    Column('right_old', VARCHAR(length = 255), nullable=False),
+    Column('right_new', VARCHAR(length = 255), nullable=False))
 
 engine = create_engine('postgresql+psycopg2://postgres:root@localhost/wikidb')
 conn = engine.connect()

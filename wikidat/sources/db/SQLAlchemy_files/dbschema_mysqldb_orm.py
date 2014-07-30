@@ -138,6 +138,57 @@ class Logging(Base):
         self.log_new_flag = log_new_flag
         self.log_old_flag = log_old_flag
 
+class Block(Base):
+    __tablename__ = 'block'
+    __table_args__ = params
+    block_id = Column(INTEGER(unsigned=True), nullable=False, primary_key=True)
+    block_action = Column(VARCHAR(length = 15, binary = True), nullable=False)
+    block_user = Column(INTEGER(unsigned=True), nullable=False)
+    block_timestamp = Column(DATETIME, nullable=False)
+    block_target = Column(INTEGER, nullable=False)
+    block_ip = Column(INTEGER(display_width= 10, unsigned=True), nullable= False)
+    block_duration = Column(INTEGER(unsigned=True), nullable=False)
+
+    def __init__(self, block_id=None, block_action = None, block_user=None, block_timestamp =None, block_target=None,
+                 block_ip=None, block_duration=None):
+        self.block_id = block_id
+        self.block_action = block_action
+        self.block_user = block_user
+        self.block_timestamp = block_timestamp
+        self.block_target = block_target
+        self.block_ip = block_ip
+        self.block_duration = block_duration
+   
+class NewUser(Base):
+    __tablename__ = 'newuser'
+    __table_args__ = params
+    user_id = Column(INTEGER(unsigned=True), nullable=False, primary_key=True)
+    username = Column(VARCHAR(length = 255), nullable=False)
+    user_timestamp = Column(DATETIME, nullable=False)
+    user_action = Column(VARCHAR(15), nullable=False)
+
+    def __init__(self, user_id=None, username = None, user_timestamp=None,user_action=None):
+        self.user_id = user_id
+        self.username = username
+        self.user_timestamp = user_timestamp
+        self.user_action = user_action
+
+		
+class Right(Base):
+    __tablename__ = 'right'
+    __table_args__ = params
+    right_id = Column(INTEGER(unsigned=True), nullable=False, primary_key=True)
+    right_username = Column(VARCHAR(length = 255), nullable=False)
+    right_timestamp = Column(DATETIME, nullable=False)
+    right_old = Column(VARCHAR(length = 255), nullable=False)
+    right_new = Column(VARCHAR(length = 255), nullable=False)
+
+    def __init__(self, right_id=None, right_username = None, right_timestamp=None, right_old=None, right_new = None):
+        self.right_id = right_id
+        self.right_username = right_username
+        self.right_timestamp = right_timestamp
+        self.right_old = right_old
+        self.right_new = right_new		
 
 engine = create_engine('mysql+mysqldb://root:@localhost/')
 engine.execute("DROP DATABASE IF EXISTS wikidb")
