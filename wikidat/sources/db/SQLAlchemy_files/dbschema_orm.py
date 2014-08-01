@@ -13,7 +13,7 @@ import sys
 
 Base = declarative_base()
 
-dbengine = 'MyISAM'  # sys.argv[1]
+dbengine = 'InnoDB'  # sys.argv[1]
 params = {'mysql_engine': dbengine}
 
 
@@ -189,6 +189,7 @@ class Right(Base):
 		
 
 engine = create_engine('mysql+pymysql://root:@localhost/')
+engine.execute("DROP DATABASE IF EXISTS wikidb")
 engine.execute("CREATE DATABASE IF NOT EXISTS wikidb CHARACTER SET utf8 COLLATE utf8_general_ci")  # create db
 engine.execute("USE wikidb")
 Base.metadata.create_all(engine)

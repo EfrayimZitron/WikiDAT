@@ -14,7 +14,7 @@ import sys
 
 metadata = MetaData()
 
-dbengine = 'MyISAM'  # sys.argv[1]
+dbengine = 'InnoDB'  # sys.argv[1]
 
 page = Table('page', metadata,
     Column('page_id', INTEGER(unsigned=True), nullable=False),
